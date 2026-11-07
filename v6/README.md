@@ -33,6 +33,16 @@ pwsh v6/tools/edit.ps1                 # 打开 data/maps/campground_edit.json
 pwsh v6/tools/edit.ps1 -Map my_map.json
 ```
 
+Web（HTML5 / WebAssembly，纯静态文件）：
+
+```powershell
+pwsh v6/tools/build_web.ps1            # → dist/web/（首次缺 assets/parts 会自动拆件）
+python v6/tools/serve_web.py           # → http://127.0.0.1:5173（dev 隧道 https://dev.wulie.tech）
+```
+
+浏览器里 Web 平台自动用 gl_compatibility（WebGL2），平台差异、线程开关和部署注意
+见 [docs/web.md](docs/web.md)。
+
 改个别模型：把 `assets/parts/<变体>.tscn` 复制到 `assets/parts_over/` 同名再改（或放同名 `.glb`），
 加载时覆盖生效，不动 GLB、不重跑拆件器。详见 [docs/地图与模型.md](docs/地图与模型.md)。
 
@@ -96,6 +106,9 @@ v6/
   assets/parts/<变体>.tscn         拆件器生成物（174 个，17 MB，gitignore）
   assets/parts_over/               人工覆盖件（优先于 parts/）
   tools/                   运行 / 出静帧 / 编辑器 / 拆件 / 校验 / 标定 / 拼图比对
+  tools/build_web.ps1      Web 出包（import → 缺件时拆件 → export-release）
+  tools/serve_web.py       本地静态服务器（.wasm MIME + COOP/COEP，默认 5173）
+  docs/web.md              Web 构建 / 预览 / 部署与 Compatibility 差异
 ```
 
 工作产物（截图、appdata、日志）都落在仓库根的 `.run/` 下，不进库。
@@ -137,3 +150,4 @@ GTX 1050 Ti / 1246×956 / 关 vsync：`avg 11.8~12.4 ms`（80~85 fps），`draw_
 - 阴影过滤算法不同（three.js PCFSoft vs Godot 的 soft shadow filter），边缘柔和度略有差别。
 - 页面在裸 GLB 上还叠了 `ao-core.mjs` / `looks.mjs` 这类运行时效果，默认态没启用，这里也没加。
 - GLB 自带 36 个 skin（水面、灯串等可动件），页面靠 .mjs 驱动；本工程暂无动画，静态显示。
+- Web 用 Compatibility（WebGL2）渲染，阴影/抗锯齿与桌面 Forward+ 略有差别，见 [docs/web.md](docs/web.md)。

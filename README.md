@@ -2,7 +2,7 @@
 
 把 [polyfork 的 Campground & Lake kit](https://polyfork.dev/kit/campground-lake-ad32b0) 那张单文件场景
 GLB（19.87 MB / 533 mesh / 162k tris）搬进 Godot 4.7：默认视角、背景、光照与官网 three.js 观看器逐项对齐，
-另带一套可拖放的地图编辑器、4 个会走动的角色，桌面与 Android 都能跑。
+另带一套可拖放的地图编辑器、4 个会走动的角色，桌面、Android 与浏览器都能跑。
 
 ![默认视角 1246×956（Godot 4.7 / GTX 1050 Ti）](v6/docs/img/campground-lake.png)
 
@@ -24,9 +24,12 @@ pwsh v6/tools/run.ps1          # 开窗：左键拖动环绕 / 滚轮朝光标�
 pwsh v6/tools/shot.ps1         # 出静帧 → .run/v6-shots/kit.png
 pwsh v6/tools/edit.ps1         # 地图编辑器：拖动摆放、旋转缩放、增删复制、存 map.json
 pwsh v6/tools/build_apk.ps1    # 出 Android APK（包名 hometown.wulie.tech，arm64）
+
+pwsh v6/tools/build_web.ps1    # 出 Web（HTML5）静态文件 → dist/web/
+python v6/tools/serve_web.py   # 本地预览 → http://127.0.0.1:5173（dev 隧道 https://dev.wulie.tech）
 ```
 
-手机上：单指拖 = 环绕，双指捏合 = 缩放，双指一起拖 = 平移。
+手机上：单指拖 = 环绕，双指捏合 = 缩放，双指一起拖 = 平移。浏览器里同一套操作。
 
 ## 里面有什么
 
@@ -40,6 +43,9 @@ pwsh v6/tools/build_apk.ps1    # 出 Android APK（包名 hometown.wulie.tech，
 | `v6/shaders/` | 半球光等价物、地面接影 |
 | `v6/data/look.json` | 全部可调参数：相机、背景渐变、光、接触阴影（改参数不用改代码） |
 | `v6/tools/` | 运行 / 出图 / 编辑 / 拆件 / 校验 / 标定 / 拼图比对 |
+| `v6/tools/build_web.ps1` | 出 Web 构建 → `dist/web/`（import + 拆件 + export-release） |
+| `v6/tools/serve_web.py` | 本地静态服务器：`.wasm` MIME + COOP/COEP，默认 5173 |
+| `v6/export_presets.cfg` | Android 与 Web 两个导出预设 |
 
 ## 文档
 
@@ -47,6 +53,7 @@ pwsh v6/tools/build_apk.ps1    # 出 Android APK（包名 hometown.wulie.tech，
 - [v6/docs/对齐记录.md](v6/docs/对齐记录.md) —— 对齐过程与每次差异的来源
 - [v6/docs/地图与模型.md](v6/docs/地图与模型.md) —— 拆件器、part 覆盖、角色与编辑器
 - [v6/docs/性能.md](v6/docs/性能.md) —— 帧时与 draw call 分项、优化顺序
+- [v6/docs/web.md](v6/docs/web.md) —— Web 构建 / 预览 / 部署，Compatibility 与 Forward+ 的差异
 
 ## 性能（同机实测）
 
