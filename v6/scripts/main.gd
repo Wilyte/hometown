@@ -239,6 +239,10 @@ func _build_environment() -> void:
 	sm.set_shader_parameter("sky_color", _color(hemi.sky))
 	sm.set_shader_parameter("ground_color", _color(hemi.ground))
 	sm.set_shader_parameter("radiance_scale", float(hemi.energy) / PI)
+	# gl_compatibility（Web/WebGL2）的 sky 管线会把 COLOR 当作 sRGB 再解码成线性，
+	# Forward+/mobile 则直接按线性用。按后端补一次编码，两边的半球环境光才一致。
+	if String(RenderingServer.get_current_rendering_method()) == "gl_compatibility":
+		sm.set_shader_parameter("srgb_output", true)
 	sky.sky_material = sm
 
 	env.sky = sky
