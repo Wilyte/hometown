@@ -1,0 +1,30 @@
+{
+  "_note": "接触阴影关掉的 A/B 用配置",
+  "cam": {
+    "fov": 38.0,
+    "fit": 0.525,
+    "pitch_deg": 17.8,
+    "yaw": 0.61,
+    "min_factor": 0.35,
+    "max_factor": 2.5,
+    "min_distance": 0.6,
+    "max_distance": 450.0,
+    "floor_y": 0.0,
+    "floor_margin": 1.5,
+    "min_pitch_deg": 8.0
+  },
+  "map": "res://data/maps/campground.json",
+  "bg": "#eaf1fe",
+  "bg_gradient": {
+    "center_pct": [32.0, 18.0],
+    "size_pct": [120.0, 130.0],
+    "stops": [[0.0, "#ffffff"], [0.55, "#eef2f7"], [1.0, "#dfe6ef"]]
+  },
+  "hemi": { "sky": "#ffffff", "ground": "#b8b0a4", "energy": 1.15 },
+  "key": { "color": "#fff2e0", "energy": 0.7639437, "dir": [4.0, 7.0, 5.0], "angular": 0.35, "bias": 0.02, "normal_bias": 1.0, "blur": 1.0, "shadow_distance_factor": 2.2 },
+  "rim": { "color": "#dfe8ff", "energy": 0.286479, "dir": [-5.0, 4.0, -6.0] },
+  "ambient": { "energy": 1.0 },
+  "contact_shadow": { "enabled": false, "opacity": 0.18, "span_factor": 1.6, "resolution": 1024 },
+  "tonemap": { "exposure": 1.0 },
+  "actors": { "enabled": true, "speed": 1.15, "wander_radius": 6.0, "per_part": { "park-ranger": { "mode": "walk" }, "kid-with-a-flashlight": { "mode": "walk" }, "backpacker": { "mode": "idle" }, "lake-angler": { "mode": "idle" } } }
+}

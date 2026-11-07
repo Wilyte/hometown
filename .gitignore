@@ -1,0 +1,59 @@
+# ---- 构建产物 ----
+dist/
+.build/
+.run/
+v3/.godot/
+v3/.godot-home/
+*.pck
+*.wasm
+*.exe
+*.apk
+# ---- 旧版本 / 大体积素材（需要的话再单独加，或走 LFS）----
+v2/
+/refs/
+# ---- 系统 / 编辑器 ----
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# ---- 地图编辑器（map-editor）----
+map-editor/node_modules/
+map-editor/dist/
+map-editor/.npm-cache/
+map-editor/.swc-cache/
+map-editor/.shots/
+v3/map/*.tmp
+
+# ---- 取证截图（体积大，不进库）----
+v3/docs/evidence/
+*.tmp
+
+# ---- Blender 材质链路产物（bash v3/blender/tools.sh all 重新生成）----
+v3/assets/palette.json
+v3/blender/materials.blend
+v3/blender/materials.meta.json
+v3/blender/*.blend1
+
+# ---- Python 缓存 ----
+__pycache__/
+*.pyc
+
+# ---- 本地工具产物（不入库）----
+.workbuddy-ai/
+tools/dex-split
+
+# ---- v4 ----
+v4/**/*.blend1
+v4/**/__pycache__/
+v4/game/.godot/
+v4/art/renders/w2/*.exr
+
+# ---- v6 ----
+v6/.godot/
+v6/appdata/
+v6/shots/
+v6/**/__pycache__/
+# 拆件器生成物（一条命令重生成，见 v6/docs/地图与模型.md）
+v6/assets/parts/
+v6/data/maps/_selftest.json

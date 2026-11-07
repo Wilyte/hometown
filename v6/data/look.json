@@ -1,0 +1,107 @@
+{
+  "_comment": "观看器参数来自 polyfork 页面 viewer.js + 该 kit 页的 mountViewer 调用；改这里不改代码。",
+  "_map_note": "map 指向 part 拼装的地图清单；留空则回退到整张 GLB。",
+  "map": "res://data/maps/campground.json",
+  "_energy_note": "Godot 平行光的 diffuse = albedo*energy*dotNL（实测 k=1），three.js 是 albedo/PI*intensity*dotNL，所以 energy = intensity/PI。",
+  "cam": {
+    "fov": 38.0,
+    "fit": 0.525,
+    "pitch_deg": 17.8,
+    "yaw": 0.61,
+    "min_factor": 0.35,
+    "max_factor": 2.5,
+    "min_distance": 0.6,
+    "max_distance": 450.0,
+    "_note": "min/max_distance 是可缩放范围（米）；页面原本是 0.35d~2.5d（39~279 m），这里放给到 0.6~450 m",
+    "floor_y": 0.0,
+    "floor_margin": 1.5,
+    "_floor_note": "相机不得低于「脚下真实地面(坡上按坡算) + floor_margin」，俯角另有 8° 硬下限，永不出现贴地平视看见岛底",
+    "min_pitch_deg": 8.0
+  },
+  "bg": "#eaf1fe",
+  "_bg_note": "页面 canvas 自己带一层 CSS 径向渐变（alpha 透明的 canvas 后面透出来），照抄这里即可。",
+  "bg_gradient": {
+    "center_pct": [
+      32.0,
+      18.0
+    ],
+    "size_pct": [
+      120.0,
+      130.0
+    ],
+    "stops": [
+      [
+        0.0,
+        "#ffffff"
+      ],
+      [
+        0.55,
+        "#eef2f7"
+      ],
+      [
+        1.0,
+        "#dfe6ef"
+      ]
+    ]
+  },
+  "hemi": {
+    "sky": "#ffffff",
+    "ground": "#b8b0a4",
+    "energy": 1.15
+  },
+  "key": {
+    "color": "#fff2e0",
+    "energy": 0.7639437,
+    "dir": [
+      4.0,
+      7.0,
+      5.0
+    ],
+    "angular": 0.35,
+    "bias": 0.02,
+    "normal_bias": 1.0,
+    "blur": 1.0,
+    "shadow_distance_factor": 2.2
+  },
+  "rim": {
+    "color": "#dfe8ff",
+    "energy": 0.286479,
+    "dir": [
+      -5.0,
+      4.0,
+      -6.0
+    ]
+  },
+  "ambient": {
+    "energy": 1.0
+  },
+  "contact_shadow": {
+    "enabled": true,
+    "opacity": 0.18,
+    "span_factor": 1.6,
+    "resolution": 1024
+  },
+  "tonemap": {
+    "exposure": 1.0
+  },
+  "actors": {
+    "enabled": true,
+    "speed": 1.15,
+    "wander_radius": 6.0,
+    "per_part": {
+      "park-ranger": {
+        "mode": "walk"
+      },
+      "kid-with-a-flashlight": {
+        "mode": "walk"
+      },
+      "backpacker": {
+        "mode": "idle"
+      },
+      "lake-angler": {
+        "mode": "idle"
+      }
+    },
+    "_note": "4 个角色共用 31 根骨的 Mixamo 骨架，GLB 无动画片段，这里用程序化步态：迈腿/屈膝/摆臂/呼吸；钓客只待机"
+  }
+}
