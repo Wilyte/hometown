@@ -17,7 +17,8 @@ pwsh v6/tools/build_web.ps1 -Out dist/web-preview
 ```
 
 脚本做三件事：`--import` 导入资源 → 缺 `assets/parts/` 时自动跑一次拆件器 →
-`--export-release "Web"` 出静态文件。产物（本机 4.7.2 实测）：
+`--export-release "Web"` 出静态文件。Godot 不在默认路径（或 Linux 下）时用
+`-Godot /path/to/godot` 覆盖。产物（本机 4.7.2 实测）：
 
 | 文件 | 体积 | 说明 |
 |---|---|---|
@@ -36,7 +37,7 @@ python v6/tools/serve_web.py --host 0.0.0.0 --port 8000   # 局域网/手机
 ```
 
 默认端口 **5173** 是部署里 dev 隧道的约定（容器 `127.0.0.1:5173` →
-`https://dev.wulie.tech`，外面套 Authelia 登录）。服务器做了三件 Web 导出必须的事：
+`https://dev.wulie.tech`，外面套 Authelia 登录）。服务器顺手处理了三件容易踩坑的事：
 
 - `.wasm` 用 `application/wasm` 发（发错浏览器会退回慢速编译）；
 - 带 `Cross-Origin-Opener-Policy: same-origin` 和 `Cross-Origin-Embedder-Policy: require-corp`；

@@ -15,9 +15,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $proj = Split-Path -Parent $PSScriptRoot          # v6
 $root = Split-Path -Parent $proj                   # 仓库根
-$env:APPDATA = Join-Path $root '.run\appdata'      # 里面要有 export_templates
+$env:APPDATA = Join-Path $root '.run' 'appdata'    # 里面要有 export_templates
 New-Item -ItemType Directory -Force $env:APPDATA, (Join-Path $root 'dist') | Out-Null
-$logDir = Join-Path $root '.run\v6-shots'
+$logDir = Join-Path $root '.run' 'v6-shots'
 New-Item -ItemType Directory -Force $logDir | Out-Null
 
 $web = if ([System.IO.Path]::IsPathRooted($Out)) { $Out } else { Join-Path $root $Out }
@@ -27,7 +27,7 @@ New-Item -ItemType Directory -Force $web | Out-Null
 Write-Host "== import"
 & $Godot --headless --path $proj --import *> (Join-Path $logDir 'web-import.log')
 
-$parts = Join-Path $proj 'assets\parts'
+$parts = Join-Path $proj 'assets' 'parts'
 if (-not (Test-Path $parts) -or @(Get-ChildItem $parts -Filter *.tscn -ErrorAction SilentlyContinue).Count -eq 0) {
     Write-Host "== split parts（第一次构建，生成 assets/parts）"
     & $Godot --headless --path $proj -s res://tools/split_parts.gd *> (Join-Path $logDir 'web-parts.log')
